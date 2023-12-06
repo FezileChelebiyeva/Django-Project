@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'students/css/styles.css' %}" rel="stylesheet" />
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <header>
+      <ul class="mainmenu">
+        <li class="logo">
+          <a href="/"
+            ><div class="logo">
+              <img src="{% static 'students/images/logo.png' %}" alt="" /></div
+          ></a>
+        </li>
+        {% for m in menu %} {% if not forloop.last %}
+        <li><a href="{% url m.url_name %}">{{m.title}}</a></li>
+
+        {% else %}
+        <li class="last">
+          <button>
+            <a href="{% url m.url_name %}">{{m.title}}</a>
+          </button>
+        </li>
+        {% endif %} {% endfor %}
+      </ul>
+    </header>
+    <div class="main">
+      <section class="first">
+        <ul>
+          <li class="selected">Qruplar:</li>
+          <li><a href="#">660a1</a></li>
+          <li><a href="#">660a2</a></li>
+          <li><a href="#">660a3</a></li>
+          <li class="share">
+            <p>Universitet</p>
+            <a
+              class="share-yt"
+              href="https://www.aztu.edu.az/az"
+              target="_blank"
+            >
+              <img src="{% static 'students/images/aztu_logo2.png' %}" alt="" />
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="second">{% block content %} {% endblock %}</section>
+    </div>
+
+    <footer>
+      <div class="container">
+        <b>2023 by Fazila Chalabiyeva</b>
+      </div>
+    </footer>
+  </body>
+</html>

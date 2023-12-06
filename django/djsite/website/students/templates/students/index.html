@@ -1,0 +1,15 @@
+{% extends 'students/base.html' %} {% block content %}
+<div class="index">
+  <h1>Tələbələr</h1>
+  <ul>
+    {% for p in posts %}
+    <li>
+      <h2>{{p.name}}</h2>
+      <p>{{p.content|linebreaks|truncatewords:45}}</p>
+      <hr />
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}
