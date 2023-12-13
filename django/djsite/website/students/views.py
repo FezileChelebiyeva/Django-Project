@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from students.models import Studens
+from students.models import *
+from django.http import HttpResponse
+
 # Create your views here.
 
 
@@ -7,13 +9,31 @@ menu = [{'title': 'Əsas Səhifə', 'url_name': 'home'},
         {'title': 'Məlumat', 'url_name': 'about'},
         {'title': 'Əlaqə', 'url_name': 'contact'},
         {'title': 'Məqalə əlavə etmə', 'url_name': 'add_page'},
-        {'title': 'Daxil olun', 'url_name': 'login'}]
-
-posts = Studens.objects.all()
+        {'title': 'Daxil olun', 'url_name': 'login'},
+        ]
 
 
 def index(request):
-    data = {'title': 'Əsas Səhifə', "menu": menu, "posts": posts}
+    posts = Studens.objects.all()
+    cats = Category.objects.all()
+    data = {'title': 'Əsas Səhifə', "menu": menu,
+            "posts": posts, 'cats': cats, 'cat_selected': 0, }
+    return render(request, 'students/index.html', context=data)
+
+
+def show_post(request, post_id):
+    posts = Studens.objects.filter(id = post_id)
+    data = {'title': 'Əsas Səhifə', "menu": menu,
+            "posts": posts, 'post_id': post_id, }
+    return render(request, 'students/index.html', context=data)
+    # return HttpResponse(f"Məqalənin id ilə göstərilməsi = {post_id}")
+
+
+def show_category(request, cat_id):
+    posts = Studens.objects.filter(cat_id=cat_id)
+    cats = Category.objects.all()
+    data = {'title': 'Əsas Səhifə', "menu": menu,
+            "posts": posts, 'cats': cats, 'cat_selected': cat_id, }
     return render(request, 'students/index.html', context=data)
 
 

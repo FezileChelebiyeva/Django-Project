@@ -5,7 +5,36 @@
     {% for p in posts %}
     <li>
       <h2>{{p.name}}</h2>
-      <p>{{p.content|linebreaks|truncatewords:45}}</p>
+     
+
+      {% if post_id %}
+      {% autoescape on%}
+      <p>{{p.content| linebreaks}}</p>
+      {% endautoescape %}
+      {% else %}
+      {% autoescape on%}
+      <p>{{p.content| linebreaks| truncatewords:50}}</p>
+      {% endautoescape %}
+      {% endif %}
+      
+      <div class="text">
+        <div>
+          <!-- {{p.scholarship}}
+          {% if p.scholarship %}
+          <p>Təqaüd alır</p>
+          {% else %}
+          <p>Təqüd almır</p>
+          {% endif %}  -->
+        </div>
+        <p class="link-read-post">
+          <a href="{{ p.get_absolute_url }}">Davamı</a>
+        </p>
+      </div>
+      <div class="article-panel">
+        <p>Qrup: {{p.cat.name}}</p>
+        <p>Tarix: {{p.time_update|date:"d-m-Y H:i:s"}}</p>
+      </div>
+
       <hr />
     </li>
     {% endfor %}

@@ -1,0 +1,10 @@
+{% extends 'students/base.html' %} {% block content %}
+<ul>
+  {% for p in posts %} 
+  {% if p.pk == post_id %} 
+  {{p.name}} 
+  {% endif %} 
+  {% endfor
+  %}
+</ul>
+{% endblock %}
